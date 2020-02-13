@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.latou.gym.mapper.EssayMapper">
+    <!--表名-->
+    <sql id="BASE_TABLE">
+        essay
+    </sql>
+    <!--列名-->
+    <sql id="BASE_COLUMN">
+        essay_id,
+        essay_board_id,
+        essay_title,
+        essay_content,
+        essay_create_time,
+        essay_update_time,
+        essay_view_count,
+        essay_url
+    </sql>
+    <select id="findAllEssay"  resultType="Essay">
+        select * from essay
+    </select>
+
+
+</mapper>
