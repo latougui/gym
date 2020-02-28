@@ -23,4 +23,6 @@ public interface BoardMapper {
      * @return
      */
     List<Board> findAllBoard();
+
+    Board findBoardByBoardId(long boardId);
 }

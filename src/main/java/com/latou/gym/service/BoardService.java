@@ -21,4 +21,6 @@ public interface BoardService {
      * @return
      */
     List<Board> findAllBoard();
+
+    Board findBoardByBoardId(long boardId);
 }

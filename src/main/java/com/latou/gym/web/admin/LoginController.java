@@ -1,5 +1,7 @@
 package com.latou.gym.web.admin;
 
+import com.latou.gym.service.BoardService;
+import com.latou.gym.service.EssayService;
 import com.latou.gym.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +19,10 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    EssayService essayService;
+    @Autowired
+    BoardService boardService;
 
     @GetMapping(value = {"","/login"})
     public String login(){
@@ -38,5 +44,13 @@ public class LoginController {
         }
         return "admin/index";
     }
+
+    @GetMapping("/index")
+    public String index(Model model){
+        int essayCount = essayService.countEssay();
+        model.addAttribute("essayCount",essayCount);
+        return "admin/index";
+    }
+
 
 }

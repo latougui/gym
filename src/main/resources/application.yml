@@ -27,6 +27,9 @@ mybatis:
     map-underscore-to-camel-case: true
   type-aliases-package: com.latou.gym.domain
 
+imageUpload:
+  url: C://mysoftware//images//upload//
+
 
 
 

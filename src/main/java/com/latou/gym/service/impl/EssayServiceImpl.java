@@ -20,17 +20,37 @@ public class EssayServiceImpl implements EssayService {
     }
 
     @Override
-    public List<Essay> findAllEssayByBoard() {
-        return null;
+    public List<Essay> findAllEssayByBoard(long essayBoradId) {
+        return essayMapper.findAllEssayByBoard(essayBoradId);
+    }
+
+    @Override
+    public List<Essay> findRecentEssay(long essayBoardId) {
+        return essayMapper.findRecentEssay(essayBoardId);
+    }
+
+    @Override
+    public Essay findEssayById(long essayId) {
+        return essayMapper.findEssayById(essayId);
     }
 
     @Override
     public void addEssay(Essay essay) {
-
+       essayMapper.addEssay(essay);
     }
 
     @Override
-    public void deleteEssay(long id) {
+    public void updateEssay(Essay essay) {
+        essayMapper.updateEssay(essay);
+    }
 
+    @Override
+    public void deleteEssay(long essayId) {
+        essayMapper.deleteEssay(essayId);
+    }
+
+    @Override
+    public int countEssay() {
+        return essayMapper.countEssay();
     }
 }

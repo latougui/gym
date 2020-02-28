@@ -22,5 +22,66 @@
         select * from essay
     </select>
 
+    <select id="findEssayById" resultType="Essay">
+        SELECT * FROM essay WHERE essay_id= #{essayId}
+    </select>
 
+    <insert id="addEssay">
+    INSERT INTO essay(
+        essay_id,
+        essay_board_id,
+        essay_title,
+        essay_content,
+        essay_create_time,
+        essay_update_time,
+        essay_view_count,
+        essay_url
+    )
+    VALUES
+    (
+        #{essayId},
+        #{essayBoardId},
+        #{essayTitle},
+        #{essayContent},
+        #{essayCreateTime},
+        #{essayUpdateTime},
+        #{essayViewCount},
+        #{essayUrl}
+    )
+    </insert>
+    <update id="updateEssay">
+        UPDATE essay
+        SET
+        essay_board_id= #{essayBoardId},
+        essay_title= #{essayTitle},
+        essay_content= #{essayContent},
+        essay_create_time= #{essayCreateTime},
+        essay_update_time= #{essayUpdateTime},
+        essay_view_count= #{essayViewCount},
+        essay_url=#{essayUrl}
+        WHERE
+            essay_id=#{essayId}
+    </update>
+    
+    <delete id="deleteEssay">
+        DELETE FROM essay WHERE essay_id=#{essayId}
+    </delete>
+
+    <select id="countEssay" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM essay
+    </select>
+
+    <select id="findAllEssayByBoard" resultType="Essay">
+        SELECT *
+        FROM essay
+        WHERE essay_board_id=#{essayBoardId}
+        ORDER BY essay_update_time desc
+    </select>
+
+    <select id="findRecentEssay" resultType="Essay">
+        SELECT *
+        FROM essay
+        WHERE essay_board_id=#{essayBoardId}
+        ORDER BY essay_update_time desc limit 10
+    </select>
 </mapper>

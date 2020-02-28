@@ -17,6 +17,7 @@ public class SpringBootGymApplication extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/templates/");
         registry.addResourceHandler("/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/");
         registry.addResourceHandler("/admin").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/admin/");
+        registry.addResourceHandler("/ui").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/ui/");
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
 

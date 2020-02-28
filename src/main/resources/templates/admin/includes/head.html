@@ -69,33 +69,34 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
 
-                <li class="active treeview">
-                    <a href="#">
+                <li class="active view">
+                    <a th:href="@{/admin/index}">
                         <i class="fa fa-dashboard"></i> <span>仪表盘</span>
 
                     </a>
 
                 </li>
-                <li class="treeview">
+                <li class="view">
+
                     <a th:href="@{/admin/essay/edit}">
                         <i class="fa fa-file-text-o"></i>
                         <span>发布文章</span>
                     </a>
                 </li>
 
-                <li class="treeview">
-                    <a href="#">
+                <li class="view">
+                    <a th:href="@{/admin/essay/list}">
                         <i class="fa fa-list"></i>
                         <span>文章管理</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="view">
                     <a href="#">
                         <i class="fa fa-tags"></i>
                         <span>分类管理</span>
                     </a>
                 </li>
-                <li class="treeview">
+                <li class="view">
                     <a href="#">
                         <i class="fa fa-comments"></i>
                         <span>评论管理</span>
