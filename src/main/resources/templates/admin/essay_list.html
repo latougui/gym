@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>健身房 | 后台管理</title>
+
+
+    <th:block th:include="admin/includes/head :: header"></th:block>
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="admin/includes/head::header-body"></div>
+    <div class="content-wrapper">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">文章管理</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>文章标题</th>
+                        <th>所属分类</th>
+                        <th>发布时间</th>
+                        <th>浏览量</th>
+                        <th>发布状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="post,stat: ${essays}">
+                    <tr th:id="${post.essayId}">
+                        <td>
+                            <a th:href="@{#}" th:text="${post.essayTitle}"></a>
+                        </td>
+                        <td th:text="${post.essayBoardId}">
+                        </td>
+                        <td th:text="${post.essayCreateTime}"></td>
+                        <td th:text="${post.essayBoardId}"></td>
+                        <td>暂无</td>
+                        <td>
+                            <a th:href="@{'/admin/essay/'+${post.essayId}}" class="btn btn-primary btn-sm waves-effect waves-light m-b-5">
+                                <i class="fa fa-edit"></i> <span>编辑</span>
+                            </a>
+                            <a th:onclick="'javascript:deleteEssay(\''+${post.essayId}+'\')'" class="btn btn-danger btn-sm waves-effect waves-light m-b-5">
+                                <i class="fa fa-trash-o"></i> <span>删除</span>
+                            </a>
+                            <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5" th:href="@{#}" target="_blank">
+                                <i class="fa fa-rocket"></i> <span>预览</span>
+                            </a>
+                        </td>
+                    </tr>
+                    </th:block>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>文章标题</th>
+                        <th>所属分类</th>
+                        <th>发布时间</th>
+                        <th>浏览量</th>
+                        <th>发布状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+</div>
+<div th:replace="admin/includes/footer :: footer"></div>
+<!-- DataTables -->
+<script th:src="@{/assets/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+</body>
+
+<script type="text/javascript">
+$(function () {
+    $('#example1').DataTable({
+        'lengthChange': false,
+        //排序取消
+        "columnDefs": [{ "orderable": false, "targets": 4 },{ "orderable": false, "targets": 5 }],
+        //默认排序
+        "order": [2],
+        language: {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "显示 _MENU_ 项结果",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页"
+            },
+            "oAria": {
+                "sSortAscending": ": 以升序排列此列",
+                "sSortDescending": ": 以降序排列此列"
+            }
+        }
+    })
+    $('#example2').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : false,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : false
+
+    })
+})
+function deleteEssay(id) {
+
+    $.ajax({
+        url: '/admin/essay/delete',
+        data: {essayId: id},
+        success: function (result) {
+            console.log("成功...");
+            window.location.reload();
+        }
+    })
+}
+</script>
+</html>

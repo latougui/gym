@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/admin/essay")
@@ -32,10 +34,10 @@ public class EssayController {
     public String essayEdit(Model model){
         List<Essay> essays = essayService.findAllEssay();
         List<Board> boards = boardService.findAllBoard();
-        Iterator it = boards.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-        }
+//        Iterator it = boards.iterator();
+//        while(it.hasNext()){
+//            System.out.println(it.next());
+//        }
         model.addAttribute("boards",boards);
         return "admin/essay_edit";
     }
@@ -53,13 +55,20 @@ public class EssayController {
     @PostMapping(value = {"/publish"})
     @ResponseBody
     public APIResponse essayPublish(HttpServletRequest httpServletRequest){
-
-        String id = httpServletRequest.getParameter("essayId");
+        //获取前台输入的essay信息
+        String id = httpServletRequest.getParameter("essayId");//id存在则为编辑, 不存在则为新增
         String essayTitle = httpServletRequest.getParameter("essayTitle");
         //System.out.println("essayBoardId:"+httpServletRequest.getParameter("essayBoardId"));
         long essayBoardId = Long.parseLong(httpServletRequest.getParameter("essayBoardId"));
         System.out.println("essayBoardId:"+essayBoardId);
         String essayContent = httpServletRequest.getParameter("essayContent");
+
+
+
+
+      /*  String essayUrl = m.group();
+        System.out.println("essayUrl"+essayUrl);*/
+
         Essay essay = new Essay();
 
        // System.out.println(id+".....");
@@ -70,6 +79,20 @@ public class EssayController {
         essay.setEssayTitle(essayTitle);
         essay.setEssayBoardId(essayBoardId);
         essay.setEssayContent(essayContent);
+
+        //从content获取图片的url
+        Pattern p = Pattern.compile("!\\[\\]\\(.*\\)");
+        // Pattern p1 = Pattern.compile("[!\\[\\]\\(\\)]");
+        Matcher m = p.matcher(essayContent);
+        if(m.find()){
+            String essayUrl = m.group(0).substring(4,m.group(0).length()-1);
+            System.out.println("url:"+essayUrl);
+            essay.setEssayUrl(essayUrl);
+        }else {
+            essay.setEssayUrl("/ui/images/1.jpg");
+        }
+
+
 
         System.out.println("conten:"+essayContent);
 

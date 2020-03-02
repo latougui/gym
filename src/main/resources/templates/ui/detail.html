@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="ui/includes/header :: head"></th:block>
+
+</head>
+<style>
+    .box.box-default{
+        padding: 40px;
+    }
+    img{
+        width: 90%;
+        height: 90%;
+    }
+</style>
+
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+    <header th:replace="ui/includes/header::header"></header>
+    <div class="content-wrapper">
+    <div class="container">
+
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Layout</a></li>
+                <li class="active">Top Navigation</li>
+            </ol>
+
+            <h1 th:text="${essayDetail.essayTitle}">
+                反向卷腹常见错误是什么
+
+            </h1>
+            <small th:text="${essayDetail.essayUpdateTime}">时间：2019-12-02 17:22:32</small>
+        </section>
+
+        <section class="content">
+            <div class="box box-default">
+                <div class="box-header with-border text-center">
+                    <h2 class="box-title" th:text="${essayDetail.essayTitle}">反向卷腹常见错误是什么</h2>
+
+                </div>
+                <small>时间：2019-12-02 17:22:32</small>
+                <div class="box-body">
+                    <th:block th:utext="${essayDetail.essayContent}"></th:block>
+                </div>
+
+
+                <!-- /.box-body -->
+            </div>
+        </section>
+    </div>
+    </div>
+</div>
+<!-- jQuery 3 -->
+<script th:src="@{/assets/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/assets/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- SlimScroll -->
+<script th:src="@{/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/assets/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/assets/js/adminlte.min.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<script th:src="@{/assets/js/demo.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="ui/includes/header :: head"></th:block>
+
+</head>
+
+<!--<style th:replace="ui/includes/header::style">
+</style>-->
+<link rel="stylesheet" type="text/css" th:href="@{/ui/static/h-ui/css/H-ui.min.css}" />
+<style>
+    img{
+        width: 400px;
+        height: 180px;
+    }
+    span{
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        font-size:25px;
+        color: white;
+    }
+    table .fa.fa-circle-o{
+        position:relative;
+        display: table;
+        margin-left: 26px;
+    }
+
+</style>
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+    <header th:replace="ui/includes/header::header"></header>
+
+
+    <div class="content-wrapper">
+        <div class="wap-container">
+            <div id="slider-3">
+                <div class="slider">
+                    <div class="bd">
+                        <ul>
+                            <li>
+                                <a href="http://www.h-ui.net/" target="_blank"><img th:src="@{/ui/temp/banner1.jpg}" ></a>
+                            </li>
+                            <li>
+                                <a href="http://www.h-ui.net/zhaoshang.shtml" target="_blank"><img th:src="@{/ui/temp/banner2.jpg}" ></a>
+                            </li>
+                            <li>
+                                <a href="http://h-ui.net/H-ui.admin.shtml" target="_blank"><img th:src="@{/ui/temp/banner3.jpg}" ></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <ol class="hd cl dots">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        &nbsp;&nbsp;
+        <section class="content">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="box box-primary">
+                        <div class="box-header with-border text-center">
+                        <h3 class="box-title">站内十大</h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <td> 2</td>
+
+                                </tr>
+                                <tr>
+                                    <td> 3</td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="box box-primary">
+                    <div class="box-header with-border text-center">
+                        <h1 class="box-title">增肌</h1>
+                    </div>
+                    <div class="box-body table-hover">
+<!--                        <ul>-->
+
+<!--                        <th:block th:each="post,stat: ${essay1}">-->
+<!--                            <li>-->
+<!--                                <a class="fa fa-circle-o" th:href="@{/detail(essayId=${post.essayId})}" th:text="${post.essayTitle}+'时间: '+${post.essayUpdateTime}"></a>-->
+<!--                            </li>-->
+<!--                        </th:block>-->
+<!--                        </ul>-->
+                        <table class="table">
+                            <tbody>
+                                <th:block th:each="post,stat: ${essay1}">
+                                    <tr>
+                                        <td th:if="${stat.index} eq 0">
+                                            <div style="position:relative; display: table; margin: auto">
+
+                                                <a th:href="@{/detail(essayId=${post.essayId})}">
+                                                    <img th:src="${post.getEssayUrl()}">
+                                                    <span th:text="${post.essayTitle}"></span>
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                        <td class="fa fa-circle-o" th:if="${stat.index} ne 0" style="position:relative; display: table; margin-left: 26px">
+                                            <a th:href="@{/detail(essayId=${post.essayId})}" th:text="${post.essayTitle}">
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">站内十大</h3>
+                    </div>
+                    <div class="box-body">
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="box box-primary">
+                    <div class="box-header text-center">
+                        <h1 class="box-title">减脂</h1>
+                    </div>
+                    <div class="box-body">
+                        <table class="table">
+                            <tbody>
+                            <th:block th:each="post,stat: ${essay2}">
+                                <tr>
+                                    <td th:if="${stat.index} eq 0">
+                                        <div style="position:relative; display: table; margin: auto">
+
+                                            <a th:href="@{/detail(essayId=${post.essayId})}">
+                                            <img th:src="${post.getEssayUrl()}">
+                                                <span th:text="${post.essayTitle}"></span>
+                                           </a>
+
+                                        </div>
+                                    </td>
+                                    <td class="fa fa-circle-o" th:if="${stat.index} ne 0">
+                                        <a th:href="@{/detail(essayId=${post.essayId})}" th:text="${post.essayTitle}">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box box-primary">
+                    <div class="box-header text-center">
+                        <h3 class="box-title">康复</h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table">
+                            <tbody>
+                            <th:block th:each="post,stat: ${essay3}">
+                                <tr>
+                                    <td th:if="${stat.index} eq 0" >
+                                        <div style="position:relative; margin: auto" >
+
+                                            <a th:href="@{/detail(essayId=${post.essayId})}">
+                                                <img th:src="${post.getEssayUrl()}">
+                                                <span th:text="${post.essayTitle}"></span>
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                    <td class="fa fa-circle-o" th:if="${stat.index} ne 0">
+                                        <a th:href="@{/detail(essayId=${post.essayId})}" th:text="${post.essayTitle}">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">站内十大</h3>
+                    </div>
+                    <div class="box-body">
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    </div>
+</div>
+
+</body>
+
+
+<script type="text/javascript" th:src="@{/ui/lib/jquery/1.9.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/ui/lib/jquery-ui/1.9.1/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/ui/static/h-ui/js/H-ui.js}"></script>
+<script type="text/javascript" th:src="@{/ui/lib/jquery.SuperSlide/2.1.1/jquery.SuperSlide.min.js}"></script>
+
+<script>
+$(function(){
+    //幻灯片
+    jQuery("#slider-3 .slider").slide({mainCell:".bd ul",titCell:".hd li",trigger:"click",effect:"leftLoop",autoPlay:true,delayTime:700,interTime:3000,pnLoop:false,titOnClassName:"active"});
+});
+</script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+$.widget.bridge('uibutton', $.ui.button);
+</script>
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/assets/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- Morris.js charts -->
+<script th:src="@{/assets/bower_components/raphael/raphael.min.js}"></script>
+<script th:src="@{/assets/bower_components/morris.js/morris.min.js}"></script>
+<!-- Sparkline -->
+<script th:src="@{/assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js}"></script>
+<!-- jvectormap -->
+<script th:src="@{/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js}"></script>
+<script th:src="@{/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
+<!-- jQuery Knob Chart -->
+<script th:src="@{/assets/bower_components/jquery-knob/dist/jquery.knob.min.js}"></script>
+<!-- daterangepicker -->
+<script th:src="@{/assets/bower_components/moment/min/moment.min.js}"></script>
+<script th:src="@{/assets/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<!-- datepicker -->
+<script th:src="@{/assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script th:src="@{/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
+<!-- Slimscroll -->
+<script th:src="@{/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/assets/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/assets/js/adminlte.min.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{/assets/js/pages/dashboard.js}"></script>
+
+
+</html>
