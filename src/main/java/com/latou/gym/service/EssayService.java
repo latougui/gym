@@ -52,5 +52,11 @@ public interface EssayService {
      */
     int countEssay();
 
+    /**
+     * 根据关键字获取文章列表
+     * @return
+     */
+    List<Essay> search(String content);
+
 
 }

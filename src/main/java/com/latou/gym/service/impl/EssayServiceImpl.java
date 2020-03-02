@@ -53,4 +53,9 @@ public class EssayServiceImpl implements EssayService {
     public int countEssay() {
         return essayMapper.countEssay();
     }
+
+    @Override
+    public List<Essay> search(String content) {
+        return essayMapper.search(content);
+    }
 }

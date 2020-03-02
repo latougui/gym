@@ -7,11 +7,13 @@ import com.latou.gym.service.EssayService;
 import com.latou.gym.util.Commons;
 import com.youbenzi.mdtool.tool.MDTool;
 import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
@@ -62,6 +64,8 @@ public class homeController {
         return "ui/detail";
     }
 
+
+
     @GetMapping(value = "/list/{essayBoardId}")
     public String boardList(Model model, @PathVariable long essayBoardId){
 
@@ -77,6 +81,23 @@ public class homeController {
        model.addAttribute("essays",essays);
        model.addAttribute("board",board);
        model.addAttribute("active",board.getBoardName());
+        return "ui/board_list";
+    }
+
+    @GetMapping(value = "/search")
+    public String search(String content, Model model){
+        //System.out.println("conten:"+content);
+        List<Essay> essays = essayService.search(content);
+
+        //设置搜索页面头部内容展示
+        Board board = new Board();
+        board.setBoardName("搜索");
+        board.setBoardDesc("内容暂时");
+
+        model.addAttribute("essays",essays);
+        model.addAttribute("board",board);
+        model.addAttribute("active","search");
+       // request.getParameter(content);
         return "ui/board_list";
     }
 

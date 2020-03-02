@@ -2,6 +2,7 @@ package com.latou.gym.mapper;
 
 import com.latou.gym.domain.Essay;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -52,4 +53,10 @@ public interface EssayMapper {
      * @return
      */
     int countEssay();
+
+    /**
+     * 根据关键字获取文章列表
+     * @return
+     */
+    List<Essay> search(@Param("content")String content);
 }

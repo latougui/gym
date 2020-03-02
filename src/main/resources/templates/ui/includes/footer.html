@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="footer-content">
+
+</div>
+<body th:fragment="footer">
+<!-- Bootstrap 3.3.7 -->
+<script th:src="@{/assets/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- Morris.js charts -->
+<script th:src="@{/assets/bower_components/raphael/raphael.min.js}"></script>
+<script th:src="@{/assets/bower_components/morris.js/morris.min.js}"></script>
+<!-- Sparkline -->
+<script th:src="@{/assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js}"></script>
+<!-- jvectormap -->
+<script th:src="@{/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js}"></script>
+<script th:src="@{/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js}"></script>
+<!-- jQuery Knob Chart -->
+<script th:src="@{/assets/bower_components/jquery-knob/dist/jquery.knob.min.js}"></script>
+<!-- daterangepicker -->
+<script th:src="@{/assets/bower_components/moment/min/moment.min.js}"></script>
+<script th:src="@{/assets/bower_components/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<!-- datepicker -->
+<script th:src="@{/assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script th:src="@{/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script>
+<!-- Slimscroll -->
+<script th:src="@{/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/assets/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/assets/js/adminlte.min.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{/assets/js/pages/dashboard.js}"></script>
+
+<!--<script>-->
+<!--$(function () {-->
+<!--    /*-->
+<!--     获取form元素，调用其ajaxForm(...)方法-->
+<!--     内部的function(data)的data就是后台返回的数据-->
+<!--    */-->
+<!--    $("form").ajaxForm(function (data) {-->
+<!--            console.log(data);-->
+<!--            console.log("str:" + JSON.stringify(data));-->
+<!--        $.ajax({-->
+<!--            type: 'POST',-->
+<!--            url: '/search',-->
+<!--            data: data,-->
+<!--            async: false,-->
+<!--            dataType: 'json',-->
+<!--            success: function (result) {-->
+<!--                console.log("成功...");-->
+
+<!--            },-->
+<!--            error: function () {-->
+<!--                //-->
+<!--                console.log("失败...")-->
+<!--            }-->
+<!--        })-->
+<!--        }-->
+<!--    );-->
+<!--});-->
+
+<!--</script>-->
+</body>
+</html>

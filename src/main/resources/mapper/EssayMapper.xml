@@ -84,4 +84,14 @@
         WHERE essay_board_id=#{essayBoardId}
         ORDER BY essay_update_time desc limit 10
     </select>
+
+    <select id="search" resultType="Essay">
+        SELECT *
+        FROM essay
+        <where>
+            <if test="content !=null">
+              essay_title LIKE CONCAT ('%',#{content},'%')
+            </if>
+        </where>
+    </select>
 </mapper>
