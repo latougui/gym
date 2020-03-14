@@ -1,8 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="footer-content">
 
+<style th:fragment="style">
+    footer {
+        background: #333;
+        color: #eee;
+        font-size: 11px;
+        padding: 20px;
+    }
+    ul.unstyled {
+        list-style: none;
+        padding: 0;
+    }
+    footer h6 {
+        color: white;
+    }
+</style>
+<div th:fragment="content">
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-2">
+                    <h6>Copyright &copy;啦啦啦头</h6>
+                </div>
+
+                <div class="col-sm-4">
+                    <h6>关于我们</h6>
+                    <p>
+                        一群健身爱好者。
+                    </p>
+                </div>
+
+                <div class="col-sm-2">
+                    <h6>导航</h6>
+                    <ul class="unstyled">
+                        <li><a href="">主页</a></li>
+                        <li><a href="">服务</a></li>
+                        <li><a href="">链接</a></li>
+                        <li><a href="">联系我们</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-2">
+                    <h6>Follow us</h6>
+                    <ul class="unstyled">
+                        <li><a href="">微博</a></li>
+                        <li><a href="">微信</a></li>
+                        <li><a href="">来往</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-2">
+                    <h6>本网站由<span class="glyphicon glyphicon-heart">lalatou制作</span></h6>
+                </div>
+            </div>
+        </div>
+    </footer><!--页脚结束-->
 </div>
+
+
 <body th:fragment="footer">
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/assets/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
@@ -61,5 +118,7 @@
 <!--});-->
 
 <!--</script>-->
+
+
 </body>
 </html>

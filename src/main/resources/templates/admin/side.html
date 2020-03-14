@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" xmlns:form="http://xmlns.jcp.org/xml/ns/javaee">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>健身房 | 后台管理</title>
+
+
+    <th:block th:include="admin/includes/head :: header"></th:block>
+    <link rel="stylesheet" th:href="@{/admin/editormd/css/editormd.min.css}"/>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="admin/includes/head::header-body"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">前端侧边展示</h3>
+            </div>
+            <div class="box-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/includes/footer :: footer"></div>
+
+</body>
+</html>

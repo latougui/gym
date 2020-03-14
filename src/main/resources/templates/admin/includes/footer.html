@@ -8,12 +8,27 @@
 <script th:src="@{/assets/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script th:src="@{/assets/bower_components/jquery-ui/jquery-ui.min.js}"></script>
+<!-- 弹窗-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
 $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script th:src="@{/assets/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+
+<!-- 如果你想在上传之前修改图片大小需要加入canvas-to-blob.min.js  它必须在fileinput.min.js之前引入 -->
+<script src="https://cdn.bootcss.com/javascript-canvas-to-blob/3.14.0/js/canvas-to-blob.js"></script>
+
+<!-- 如果你想在最初的预览中排序/重新排列需要引入sortable.min.js  它必须在fileinput.min.js之前引入 -->
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/5.0.1/js/plugins/sortable.min.js"></script>
+
+<!-- 如果你想在HTML文件预览中净化HTML内容则要引入purify.min.js is  它必须在fileinput.min.js之前引入 -->
+<script src="https://cdn.bootcss.com/dompurify/1.0.10/purify.min.js"></script>
+
+<!-- 主要的 fileinput 插件库 -->
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/5.0.1/js/fileinput.min.js"></script>
+
 <!-- Morris.js charts -->
 <script th:src="@{/assets/bower_components/raphael/raphael.min.js}"></script>
 <script th:src="@{/assets/bower_components/morris.js/morris.min.js}"></script>
@@ -41,5 +56,7 @@ $.widget.bridge('uibutton', $.ui.button);
 <script th:src="@{/assets/js/pages/dashboard.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <script th:src="@{/assets/js/demo.js}"></script>
+
+
 </body>
 </html>

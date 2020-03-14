@@ -129,17 +129,24 @@ $(function() {
 <script>
 
     function subArticle(status) {
-        var title =$('#articleForm input[name=title]').val();
+        var title =$('#articleForm input[name=essayTitle]').val();
         var content = $('#essayContent').val();
-        if (title == '') {
-          //  tale.alertWarn('请输入文章标题');
+        var essayBoardId = $('#essayBoardId').val();
+        console.log(essayBoardId);
+        if (title == "") {
+            toastr.error('请输入标题')
+            return;
+        }
+        if (essayBoardId == null) {
+            toastr.error('请选择文章类型');
             return;
         }
         if (content == '') {
-            //tale.alertWarn('请输入文章内容');
+            toastr.error('请输入文章内容');
             return;
         }
-        console.log("conten:"+content);
+
+
         var params = $("#articleForm").serialize();
         console.log(params);
         $.ajax({
@@ -159,6 +166,7 @@ $(function() {
         })
 
     }
+
 </script>
 
 </body>

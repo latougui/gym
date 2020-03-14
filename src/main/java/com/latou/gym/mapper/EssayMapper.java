@@ -26,6 +26,18 @@ public interface EssayMapper {
     List<Essay> findRecentEssay(long essayBoardId);
 
     /**
+     * 返回最近10篇文章
+     * @return
+     */
+    List<Essay> findRecent();
+
+    /**
+     * 根据点赞量返回10篇文章
+     * @return
+     */
+    List<Essay> findEssayByViewId();
+
+    /**
      * 根据id获取文章
      * @return
      */
@@ -55,8 +67,16 @@ public interface EssayMapper {
     int countEssay();
 
     /**
+     * 文章点赞总量
+     * @return
+     */
+    int countEssayLove();
+
+    /**
      * 根据关键字获取文章列表
      * @return
      */
     List<Essay> search(@Param("content")String content);
+
+
 }

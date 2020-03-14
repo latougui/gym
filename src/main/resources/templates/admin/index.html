@@ -27,7 +27,7 @@
         <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-aqua">
                         <div class="inner">
@@ -43,13 +43,13 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>53</h3>
+                            <h3 th:text="${foodCount}">53</h3>
 
-                            <p>评论数量</p>
+                            <p>食物数据库数量</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -57,9 +57,43 @@
                         <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3 th:text="${loveCount}">44</h3>
+
+                            <p>收获赞总数</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-heart"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
 
             </div>
             <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           <h4 class="panel-title" style="text-align: center;">最新文章</h4>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item" th:each="essay : ${essays}">
+                                    <span class="badge badge-primary" ></span>
+                                    <a target="_blank" th:href="'/detail/'+${essay.essayId}" th:text="${essay.essayTitle}"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
         </section>
         <!-- /.content -->
 

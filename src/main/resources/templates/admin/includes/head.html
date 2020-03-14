@@ -6,6 +6,9 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" th:href="@{/assets/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/5.0.1/css/fileinput.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" th:href="@{/assets/bower_components/font-awesome/css/font-awesome.min.css}">
     <!-- Ionicons -->
@@ -90,18 +93,24 @@
                         <span>文章管理</span>
                     </a>
                 </li>
+<!--                <li class="view">-->
+<!--                    <a href="#">-->
+<!--                        <i class="fa fa-tags"></i>-->
+<!--                        <span>分类管理</span>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li class="view">
-                    <a href="#">
+                    <a th:href="@{/admin/food/list}">
                         <i class="fa fa-tags"></i>
-                        <span>分类管理</span>
+                        <span>食物管理</span>
                     </a>
                 </li>
-                <li class="view">
-                    <a href="#">
-                        <i class="fa fa-comments"></i>
-                        <span>评论管理</span>
-                    </a>
-                </li>
+<!--                <li class="view">-->
+<!--                    <a href="#">-->
+<!--                        <i class="fa fa-comments"></i>-->
+<!--                        <span>评论管理</span>-->
+<!--                    </a>-->
+<!--                </li>-->
             </ul>
         </section>
         <!-- /.sidebar -->

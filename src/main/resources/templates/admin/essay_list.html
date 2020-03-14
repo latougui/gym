@@ -26,8 +26,7 @@
                         <th>文章标题</th>
                         <th>所属分类</th>
                         <th>发布时间</th>
-                        <th>浏览量</th>
-                        <th>发布状态</th>
+                        <th>点赞量</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -35,13 +34,17 @@
                     <th:block th:each="post,stat: ${essays}">
                     <tr th:id="${post.essayId}">
                         <td>
-                            <a th:href="@{#}" th:text="${post.essayTitle}"></a>
+                            <a th:href="@{'/detail/'+${post.essayId}}" th:text="${post.essayTitle}"></a>
                         </td>
-                        <td th:text="${post.essayBoardId}">
+                        <td>
+                            <th:block th:each="board,stat: ${boards}">
+                                <div th:if="${post.essayBoardId} eq ${board.boardId}">
+                                    <p th:text="${board.boardName}"></p>
+                                </div>
+                            </th:block>
                         </td>
                         <td th:text="${post.essayCreateTime}"></td>
-                        <td th:text="${post.essayBoardId}"></td>
-                        <td>暂无</td>
+                        <td th:text="${post.essayViewCount}"></td>
                         <td>
                             <a th:href="@{'/admin/essay/'+${post.essayId}}" class="btn btn-primary btn-sm waves-effect waves-light m-b-5">
                                 <i class="fa fa-edit"></i> <span>编辑</span>
@@ -49,9 +52,9 @@
                             <a th:onclick="'javascript:deleteEssay(\''+${post.essayId}+'\')'" class="btn btn-danger btn-sm waves-effect waves-light m-b-5">
                                 <i class="fa fa-trash-o"></i> <span>删除</span>
                             </a>
-                            <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5" th:href="@{#}" target="_blank">
-                                <i class="fa fa-rocket"></i> <span>预览</span>
-                            </a>
+<!--                            <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5" th:href="@{#}" target="_blank">-->
+<!--                                <i class="fa fa-rocket"></i> <span>预览</span>-->
+<!--                            </a>-->
                         </td>
                     </tr>
                     </th:block>
@@ -61,8 +64,7 @@
                         <th>文章标题</th>
                         <th>所属分类</th>
                         <th>发布时间</th>
-                        <th>浏览量</th>
-                        <th>发布状态</th>
+                        <th>点赞量</th>
                         <th>操作</th>
                     </tr>
                     </tfoot>
@@ -84,7 +86,7 @@ $(function () {
     $('#example1').DataTable({
         'lengthChange': false,
         //排序取消
-        "columnDefs": [{ "orderable": false, "targets": 4 },{ "orderable": false, "targets": 5 }],
+        "columnDefs": [{ "orderable": false, "targets": 4 }],
         //默认排序
         "order": [2],
         language: {

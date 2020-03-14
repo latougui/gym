@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>健身房 | 后台管理</title>
+
+    <link href="https://cdn.bootcss.com/bootstrap-fileinput/5.0.8/css/fileinput-rtl.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <th:block th:include="admin/includes/head :: header"></th:block>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="admin/includes/head::header-body"></div>
+    <div class="content-wrapper">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">食物管理</h3>
+            </div>
+            <div class="box-body">
+                <button class="btn btn-info"  data-toggle="modal" data-target="#modal-default" onclick="subFood()">添加食物</button>
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>食物名称</th>
+                            <th>所属分类</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="post,stat: ${foods}">
+                        <tr th:id="${post.getFoodId()}">
+                            <td>
+                                <a th:href="@{#}" th:text="${post.getFoodName()}"></a>
+                            </td>
+                            <td>
+                                <th:block th:each="fboard,stat: ${fboards}">
+                                     <div th:if="${post.getFoodBoardId()} eq ${fboard.getFboardId()}">
+                                    <a th:href="@{#}" th:text="${fboard.getFboardName()}"></a>
+                                     </div>
+                                </th:block>
+
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default" th:onclick="'aa(\''+${stat.index}+'\');'">
+                                    编辑
+                                </button>
+                                <a class="btn btn-danger btn-sm waves-effect waves-light m-b-5" th:onclick="'javascript:deleteFood(\''+${post.foodId}+'\')'">
+                                    <i class="fa fa-trash-o"></i> <span>删除</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal-default">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">编辑 Modal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="foodForm" role="form" novalidate="novalidate">
+                                <input type="hidden" id="foodId" name="foodId">
+                                <div class="input-group">
+                                    <span class="input-group-addon">食物名称</span>
+                                    <input type="text" class="form-control" id="foodName" name="foodName">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">热量</span>
+                                    <input type="text" class="form-control" id="foodEnergy" name="foodEnergy">
+                                    <span class="input-group-addon">脂肪</span>
+                                    <input type="text" class="form-control" id="foodFat" name="foodFat">
+                                    <span class="input-group-addon">碳水化合物</span>
+                                    <input type="text" class="form-control" id="foodCarbo" name="foodCarbo">
+                                    <span class="input-group-addon">蛋白质</span>
+                                    <input type="text" class="form-control" id="foodProtein" name="foodProtein">
+                                    <span class="input-group-addon">大卡/100g</span>
+                                </div>
+                                <div class="input-group">
+                                    <select class="form-control" id="foodBoardId" name="foodBoardId">
+                                        <option selected disabled>食物类型选择</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <textarea class="form-control" rows="6" COLS="100%" placeholder="食物介绍" id="foodMessage" name="foodMessage"></textarea>
+
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">如不添加或更改则此图片为默认:</span>
+                                    <img src="/ui/images/1.jpg" id="Img" width="300" height="280"/>
+                                    <input id="foodImg2" name="foodImg2" type="hidden" value="/ui/images/1.jpg">
+                                </div>
+
+                                <div class="input-group">
+                                    <input id="editormd-image-file" name="editormd-image-file" type="file" multiple=true class="file-loading">
+
+                                    <input id="foodImg1" type="hidden" name="foodImg1">
+
+                                 </div>
+
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal" onclick="aa()">取消</button>
+                                <button type="button" class="btn btn-primary" onclick="subFood()">保存</button>
+                                </div>
+                            </form>
+                        </div>
+
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    </div>
+</div>
+<div th:replace="admin/includes/footer :: footer"></div>
+
+<!-- DataTables -->
+<script th:src="@{/assets/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<script>
+$(function () {
+    $('#example1').DataTable({
+        'lengthChange': false,
+        language: {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "显示 _MENU_ 项结果",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页"
+            },
+            "oAria": {
+                "sSortAscending": ": 以升序排列此列",
+                "sSortDescending": ": 以降序排列此列"
+            }
+        }
+    })
+    $('#example2').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : false,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : false
+
+    })
+
+
+})
+$(function () {
+    $("#editormd-image-file").fileinput({
+
+
+
+        uploadUrl: "/admin/file//upload",
+        previewFileType: "image",
+        uploadAsync: true,
+        showCaption: false,
+        allowedFileExtensions: ["png", "jpg", "jpeg", "ico", "bmp", "gif"],
+        maxFileCount: 1,
+        maxFileSize: 3072,
+        showBrowse: true,
+        dropZoneTitle: '拖拽食物图片到这里...',
+        browseLabel: "选择食物图片",
+        uploadClass: "btn btn-info",
+        uploadLabel: "上传",
+        removeClass: "btn btn-danger",
+        autoReplace: true,
+        removeLabel: "移除",
+        msgSizeTooLarge: '图片文件太大！',
+        msgFilesTooMany: "选择上传的文件数量为({n}) 超过允许的最大数值({m})！",
+        msgUploadEnd: '图片上传成功！',
+        msgUploadBegin: '初始化中...',
+        msgZoomModalHeading: '图片详情预览',
+        msgInvalidFileExtension: '非法文件扩展名 "{name}"！ 仅支持 "{extensions}" 的文件扩展名！',
+
+
+    }).on('fileerror', function (event, data, msg) {
+        alert('图片上传失败！' + msg);
+    }).on('fileuploaded', function (event, data) {
+        $("#picName").val(data.response.name);
+        $('#uploadPicture').fileinput('disable');
+    }).on('fileclear', function (event) {
+        alert("图片被清除啦！");
+    });
+    $('#editormd-image-file').on("fileuploaded", function (event, data, previewId, index) {
+        var result = data.response;
+       console.log("url:"+result.url);
+       $('#foodImg1').val(result.url);
+    });
+
+});
+
+
+
+</script>
+<script th:inline="javascript">
+function aa(post){
+    var foods = [[${foods}]];
+    var food = foods[post];
+  //  var name = food.foodName;
+  //  console.log("mingzi:"+name);
+    console.log(food);
+
+    // document.getElementById("foodName").value(name);
+    $("#foodId").val(food.foodId);
+    $("#foodName").val(food.foodName);
+    $("#foodEnergy").val(food.foodEnergy);
+    $("#foodCarbo").val(food.foodCarbo);
+    $("#foodFat").val(food.foodFat);
+    $("#foodProtein").val(food.foodProtein);
+    $("#foodMessage").val(food.foodMessage);
+    $("#foodBoardId").val(food.foodBoardId);
+    $("#foodImg2").val(food.foodImg);
+    document.getElementById('Img').src = food.foodImg;
+
+}
+
+function subFood() {
+    var params = $("#foodForm").serialize();
+    var title =$('#foodForm input[name=foodName]').val();
+
+    var foodName=$("#foodName").val();
+    var foodEnergy=$("#foodEnergy").val();
+    var foodCarbo=$("#foodCarbo").val();
+    var foodFat=$("#foodFat").val();
+    var foodProtein=$("#foodProtein").val();
+    var foodMessage=$("#foodMessage").val();
+    var foodBoardId=$("#foodBoardId").val();
+    var foodImg2=$("#foodImg2").val();
+    var foodImg1=$("#foodImg1").val();
+
+    if (foodName == "") {
+        toastr.error('请输入食物名称')
+        return;
+    }
+    if (foodEnergy == "" ||foodCarbo== ""||foodFat== ""||foodProtein== "") {
+        toastr.error('请输入食物基本元素含量')
+        return;
+    }
+    if (foodMessage == "") {
+        toastr.error('请输入食物信息')
+        return;
+    }
+    if (foodBoardId == null) {
+        toastr.error('请选择食物分类')
+        return;
+    }
+    if (foodImg1 == ""&&foodImg2 == "") {
+        toastr.error('请添加图片')
+        return;
+    }
+
+
+    console.log("pa:"+params);
+    console.log("food:"+title);
+    $.ajax({
+        type: 'POST',
+        url: '/admin/food/publish',
+        data: params,
+        async: false,
+        dataType: 'json',
+        success: function (result) {
+            console.log("成功...");
+           window.location.href = '/admin/food/list';
+        },
+        error: function () {
+            //
+            console.log("失败...")
+        }
+    })
+
+}
+function deleteFood(id) {
+
+    $.ajax({
+        url: '/admin/food/delete',
+        data: {foodId: id},
+        success: function (result) {
+            console.log("成功...");
+            window.location.reload();
+        }
+    })
+}
+</script>
+
+</body>
+</html>

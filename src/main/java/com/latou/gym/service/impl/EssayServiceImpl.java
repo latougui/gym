@@ -30,6 +30,16 @@ public class EssayServiceImpl implements EssayService {
     }
 
     @Override
+    public List<Essay> findRecent() {
+        return essayMapper.findRecent();
+    }
+
+    @Override
+    public List<Essay> findEssayByViewId() {
+        return essayMapper.findEssayByViewId();
+    }
+
+    @Override
     public Essay findEssayById(long essayId) {
         return essayMapper.findEssayById(essayId);
     }
@@ -52,6 +62,11 @@ public class EssayServiceImpl implements EssayService {
     @Override
     public int countEssay() {
         return essayMapper.countEssay();
+    }
+
+    @Override
+    public int countEssayLove() {
+        return essayMapper.countEssayLove();
     }
 
     @Override

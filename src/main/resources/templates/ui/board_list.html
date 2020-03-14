@@ -26,8 +26,7 @@
                 <small th:text="${board.getBoardDesc()}"></small>
                 <ol class="breadcrumb">
                     <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
-                    <li><a href="#">Layout</a></li>
-                    <li class="active">Top Navigation</li>
+                    <li class="active" th:text="${board.boardName}"></li>
                 </ol>
             </section>
         </div>
@@ -55,7 +54,7 @@
                                             <img th:src="${post.getEssayUrl()}">
                                         </td>
                                         <td>
-                                            <h2><a th:href="@{/detail(essayId=${post.essayId})}" th:text="${post.essayTitle}"></a></h2>
+                                            <h2><a th:href="@{/detail/{essayId}(essayId=${post.essayId})}" th:text="${post.essayTitle}"></a></h2>
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             <small th:text="${post.essayUpdateTime}"></small>
                                            <h5 th:text="${#strings.abbreviate(post.essayContent,35)}"> </h5>
@@ -82,7 +81,8 @@
 
     </div>
 </div>
-
+<style th:replace="ui/includes/footer::style"></style>
+<div th:replace="ui/includes/footer::content"></div>
 </body>
 <!-- jQuery 3 -->
 <script th:src="@{/assets/bower_components/jquery/dist/jquery.min.js}"></script>

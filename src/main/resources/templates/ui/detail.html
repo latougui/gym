@@ -2,7 +2,7 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:include="ui/includes/header :: head"></th:block>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 </head>
 <style>
     .box.box-default{
@@ -11,6 +11,20 @@
     img{
         width: 90%;
         height: 90%;
+    }
+    .popover{
+        max-width: 280px;
+        height: 210px;
+
+    }
+    .popover img{
+
+        max-width: 250px;
+        height: 180px;
+
+    }
+    .popover.top{
+
     }
 </style>
 
@@ -44,17 +58,111 @@
                 <div class="box-body">
                     <th:block th:utext="${essayDetail.essayContent}"></th:block>
                 </div>
+                <div class="text-center">
+                    <span class="like">
+                         <a href="javascript:increaseViewCount();"  id ="dian" data-action="ding" data-id="1" title="点赞" class="btn btn-default">
+                             <i class="fa fa-thumbs-up"></i>赞
+                             <i class="likeCount" id="1" th:text="${essayDetail.essayViewCount}"></i>
+                         </a>
+                    </span>
+                    <span type="button" class="btn btn-default" data-toggle="popover" data-placement="top">
+                             赏
+                    </span>
 
+
+<!--                    <textarea id="foo">123</textarea>　　//被复制对象-->
+                    <button id="foo" class="btn btn-default" data-clipboard-action="copy">
+                        <i class="fa fa-share-alt">分享</i>
+                    </button>
+                </div>
 
                 <!-- /.box-body -->
             </div>
         </section>
+
     </div>
     </div>
 </div>
+<script th:src="@{/assets/bower_components/clipboard.js/dist/clipboard.js}"></script>
+
 <!-- jQuery 3 -->
 <script th:src="@{/assets/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- 弹窗-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <div th:replace="admin/includes/footer :: footer"></div>
+<script th:src="@{/assets/bower_components/jquery-cookie/jquery.cookie.js}"></script>
+
+<script th:inline="javascript">
+    function increaseViewCount() {
+        console.log("cookid"+$.cookie('viewId'));
+        var likeId = [[${essayDetail.essayId}]];
+        var url = "/detail/"+likeId;
+        //console.log("asd:"+$.cookie("viewId")!= likeId);
+        console.log(url);
+        if($.cookie("viewId")== null || $.cookie("viewId")!= likeId){
+            $.ajax({
+                async: false,
+                    type:"POST",
+                    url:"/like",
+                    data: {essayId:likeId},
+                    dataType:"text",
+                    success:function (data) {
+                        console.log(data);
+                        $(".likeCount").text(data);
+                        $('#dian').get(0).className='btn btn-danger';
+                        $.cookie(
+                        "viewId",
+                        likeId,
+                        {   expires: 3, //重复点赞的时间间隔 /天
+                            path: url, //cookie的默认属性
+                        }
+                    );
+                        console.log("view"+$.cookie('viewId'));
+
+                },
+
+            })
+        }
+
+    }
+    if ($.cookie("viewId")== [[${essayDetail.essayId}]]) {
+        $('#dian').get(0).className='btn btn-danger';
+    }
+</script>
+<script>
+ $(function () {
+     $('[data-toggle="popover"]').popover({
+         animation:true,
+         html:true,
+         container:"body",
+         content:"<img src='/ui/images/zanshang.png' class='img-responsive center-block' >",
+
+     })
+ })
+</script>
+<script>
+
+var btn = this.location.href;
+var clipboard = new ClipboardJS('#foo', {
+    text: function(trigger) {
+        return btn;　　//复制当前页面
+
+    },
+})
+clipboard.on('success', function(e) {
+    toastr.info('复制链接成功!')
+
+});
+
+// 动态设置消息提示时间
+function clear_toastr(time){
+    setTimeout(
+        function(){
+            toastr.clear();
+        }, time);
+}
+</script>
+
 
 </body>
 </html>

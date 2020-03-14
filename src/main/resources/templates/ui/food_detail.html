@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="ui/includes/header :: head"></th:block>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+</head>
+<style>
+    table {
+        display: table;
+        border-collapse: separate;
+        border-spacing: 2px;
+        border-color: grey;
+        width: 300px;
+        margin-top: 30px;
+        font-size: large;
+    }
+    .title{
+        border-left:12px solid #69C4DA;
+    }
+</style>
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+    <header th:replace="ui/includes/header::header"></header>
+    <div class="content-wrapper">
+        <div class="container">
+
+            <section class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="/food">食物分类</a></li>
+                    <li><a th:href="@{'/food/'+${food.foodBoardId}}" th:text="${fboard.fboardName}"></a></li>
+                    <li class="active">食物详情</li>
+                </ol>
+
+                <h1>
+                    良好的饮食是健康的第一要素
+                </h1>
+            </section>
+            <section class="content">
+                <div class="box box-info">
+                    <div class="box-header">
+
+
+                    </div>
+                    <div class="box-body">
+                        <div  style="display:inline-block;">
+                            <img th:src="${food.foodImg}" width="250px" height="220px">
+                        </div>
+                        <div style="display:inline-block;margin-left:10px;">
+                            <h2 ><p th:value="${food.foodName}">白菜</p> <small>每100克</small></h2>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td><span th:value="${food.foodProtein}">1</span><b>g</b></td>
+                                        <td><span th:value="${food.foodCarbo}">1</span><b>g</b></td>
+                                        <td><span th:value="${food.foodFat}">1</span><b>g</b></td>
+                                        <td><span th:value="${food.foodEnergy}">1</span><b>g</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>蛋白质</td>
+                                        <td>碳水化合物</td>
+                                        <td>脂肪</td>
+                                        <td>热量</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="foodContent">
+                            <div class="title"><h3>食物介绍:</h3></div>
+                            <div class="foodMessage" th:text="${food.foodMessage}">
+                                <P>好好吃</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+<!-- jQuery 3 -->
+<script th:src="@{/assets/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- 弹窗-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<div th:replace="admin/includes/footer :: footer"></div>
+</html>

@@ -71,6 +71,13 @@
         SELECT COUNT(*) FROM essay
     </select>
 
+    <select id="countEssayLove" resultType="java.lang.Integer">
+       SELECT
+            sum(essay_view_count)
+        FROM
+            essay
+    </select>
+
     <select id="findAllEssayByBoard" resultType="Essay">
         SELECT *
         FROM essay
@@ -82,7 +89,19 @@
         SELECT *
         FROM essay
         WHERE essay_board_id=#{essayBoardId}
-        ORDER BY essay_update_time desc limit 10
+        ORDER BY essay_create_time desc limit 10
+    </select>
+
+    <select id="findRecent" resultType="Essay">
+        SELECT *
+        FROM essay
+        ORDER BY essay_create_time desc limit 8
+    </select>
+
+    <select id="findEssayByViewId" resultType="Essay">
+        SELECT *
+        FROM essay
+        ORDER BY essay_view_count desc limit 10
     </select>
 
     <select id="search" resultType="Essay">

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Iterator;
@@ -34,6 +35,7 @@ public class homeController {
         List<Essay> essays3 = essayService.findRecentEssay(3);
         List<Essay> essays4 = essayService.findRecentEssay(4);
         List<Essay> essays5 = essayService.findRecentEssay(5);
+        List<Essay> essays_top = essayService.findEssayByViewId();
         Iterator it = essays1.iterator();
         while(it.hasNext()) {
             System.out.println(it.next());
@@ -43,17 +45,18 @@ public class homeController {
         model.addAttribute("essay3",essays3);
         model.addAttribute("essay4",essays4);
         model.addAttribute("essay5",essays5);
+        model.addAttribute("essays_top",essays_top);
         String  active = "home";
         model.addAttribute("active",active);
 
         return "ui/home";
     }
 
-    @GetMapping(value = "/detail")
-    public String detail(HttpServletRequest request,Model model){
-        String id= request.getParameter("essayId");
-        long essayId = Long.parseLong(id);
-        Essay essayDetail = essayService.findEssayById(essayId);
+    @GetMapping(value = "/detail/{essayId}")
+    public String detail(@PathVariable String essayId ,Model model){
+
+        long essayId1 = Long.parseLong(essayId);
+        Essay essayDetail = essayService.findEssayById(essayId1);
         // essayDetail.setEssayContent(MDTool.markdown2Html(essayDetail.getEssayContent()));
         // System.out.println("qu出来:"+essayDetail.getEssayContent());
 
@@ -100,5 +103,15 @@ public class homeController {
        // request.getParameter(content);
         return "ui/board_list";
     }
+    @PostMapping(value = "/like")
+    @ResponseBody
+    public long likeCount(HttpServletRequest request){
+        long essayId = Long.valueOf(request.getParameter("essayId"));
+        Essay essay = essayService.findEssayById(essayId);
+        long count = essay.getEssayViewCount()+1;
+        essay.setEssayViewCount(count);
+        essayService.updateEssay(essay);
 
+        return count;
+    }
 }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+    <th:block th:include="ui/includes/header :: head"></th:block>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+</head>
+<style>
+    img{
+        width: 240px;
+        height: 150px;
+    }
+</style>
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+    <header th:replace="ui/includes/header::header"></header>
+    <div class="content-wrapper">
+        <div class="container">
+            <section class="content-header">
+                <h1 th:text="${fboard.getFboardName()}">
+
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="/food">食物分类</a></li>
+                    <li class="active" th:text="${fboard.fboardName}"></li>
+                </ol>
+            </section>
+
+            <section class="content">
+                <div class="row">
+
+                    <div class="col-xs-10">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <!--                            <h3 class="box-title" th:text="${board.getBoardName()}"> Hover Data Table</h3>-->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div>
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead style='display:none;'>
+                                    <tr>
+                                        <th>pian</th>
+                                        <th>pian</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="post,stat: ${foods}">
+                                        <tr th:id="${post.getFoodId()}">
+                                            <td style="width:30%">
+                                                <img src="/ui/images/1.jpg">
+                                            </td>
+                                            <td>
+                                                <h2><a th:href="@{/food/detail/{foodId}(foodId=${post.foodId})}" th:text="${post.getFoodName()}"></a></h2>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<small th:text="'热量:'+${post.foodEnergy}"></small>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<small th:text="'碳水化合物:'+${post.foodCarbo}"></small>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<small th:text="'脂肪:'+${post.foodFat}"></small>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;<small th:text="'蛋白质'+${post.foodProtein}"></small>
+
+
+                                            </td>
+
+                                        </tr>
+
+                                    </th:block>
+
+                                </table>
+
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        </div>
+                        <!-- /.box -->
+
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+<!-- jQuery 3 -->
+<script th:src="@{/assets/bower_components/jquery/dist/jquery.min.js}"></script>
+<div th:replace="admin/includes/footer :: footer"></div>
+<!-- DataTables -->
+<script th:src="@{/assets/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+<script type="text/javascript">
+$(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+        'paging'      : true,
+        'lengthChange': false,
+        'searching'   : false,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : false,
+        language: {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "显示 _MENU_ 项结果",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页"
+            },
+            "oAria": {
+                "sSortAscending": ": 以升序排列此列",
+                "sSortDescending": ": 以降序排列此列"
+            }
+        }
+    })
+})
+</script>
+</html>

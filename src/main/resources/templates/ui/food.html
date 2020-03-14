@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+    <th:block th:include="ui/includes/header :: head"></th:block>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+</head>
+
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+    <header th:replace="ui/includes/header::header"></header>
+    <div class="content-wrapper">
+        <div class="container">
+            <section class="content-header">
+                <ol class="breadcrumb">
+                    <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active">食物分类</li>
+                </ol>
+
+                <h1>
+                    食物
+
+                </h1>
+<!--                <small>时间：2019-12-02 17:22:32</small>-->
+            </section>
+
+            <section class="content">
+                <div class="row">
+                    <form action="/food/search">
+                    <div class="col-lg-8 col-md-offset-2 ">
+                        <div class="input-group input-group-lg">
+                                <input type="text" class="form-control" placeholder="Search for..." name="foodName" id="foodName">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">搜索</button>
+                                </span>
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 page-header" style="border-bottom:5px solid #69C4DA;">
+                        <h1>食物分类</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <th:block th:each="post,stat: ${fboards}">
+                        <div class="col-md-3">
+                            <a th:href="@{/food/{fboardId}(fboardId=${post.getFboardId()})}" class="thumbnail">
+                                <img th:src="${post.fboardImg}" alt="/ui/images/1.jpg">
+                                <h4 style="text-align:center" th:text="${post.getFboardName()}"></h4>
+                            </a>
+                         </div>
+                        <div class="row" th:if="${stat.index} == 2 ">
+
+                        </div>
+                    </th:block>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>

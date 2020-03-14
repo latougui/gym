@@ -22,6 +22,19 @@ public interface EssayService {
      * @return
      */
     List<Essay> findRecentEssay(long essayBoardId);
+    /**
+     * 返回最近10篇文章
+     * @return
+     */
+    List<Essay> findRecent();
+
+
+    /**
+     * 根据点赞量返回10篇文章
+     * @return
+     */
+    List<Essay> findEssayByViewId();
+
 
     /**
      * 根据id获取文章
@@ -51,6 +64,12 @@ public interface EssayService {
      * @return
      */
     int countEssay();
+
+    /**
+     * 文章点赞总量
+     * @return
+     */
+    int countEssayLove();
 
     /**
      * 根据关键字获取文章列表

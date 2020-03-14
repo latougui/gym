@@ -10,7 +10,9 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     continue-on-error: true
   resources:
-    static-locations: ["/templates/","/resources/","/static/","/public/"]
+#    static-locations: ["/resources/","/templates/","/static/**","/public/"]
+    static-locations: classpath:/static/,classpath:/views/,classpath:/resources/,classpath:/templates/,
+    cache-period: 0
   thymeleaf:
     prefix: classpath:/templates/
     check-template-location: true  #check-tempate-location: 检查模板路径是否存在
